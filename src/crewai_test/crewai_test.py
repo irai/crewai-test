@@ -17,14 +17,16 @@ class TestCrew:
     def research_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['research_agent'],
-            verbose=True
+            verbose=True,
+            allow_delegation=True
         )
 
     @agent
     def writer_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['writer_agent'],
-            verbose=True
+            verbose=True,
+            allow_delegation=True
         )
 
     @task
@@ -45,11 +47,13 @@ class TestCrew:
             agents=[self.research_agent(), self.writer_agent()],
             tasks=[self.research_task(), self.writing_task()],
             verbose=True,
-            process=Process.sequential,
+            # process=Process.sequential,
+            process=Process.hierarchical,
+            manager_llm="openai/gpt-4o"
         )
 
 def main():
-    test_topic = "Impact of AI Agents on Enterprise Architecture"
+    test_topic = "use a research agent to research the Impact of AI Agents on Enterprise Architecture. return the raw research data"
     
     try:
         test_crew = TestCrew()
