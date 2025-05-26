@@ -1,0 +1,29 @@
+research_task:
+  description: >
+    Research the following topic and provide key findings:
+    {topic}
+    
+    Your research should include:
+    1. Main points and key facts
+    2. Supporting evidence
+    3. Any relevant statistics or data
+    
+    Format your findings in a clear, structured manner.
+  agent: research_agent
+
+writing_task:
+  description: >
+    Using the research provided, create a comprehensive article about:
+    {topic}
+    
+    The article should:
+    1. Have a clear introduction
+    2. Include all key points from the research
+    3. Be well-structured and engaging
+    4. End with a strong conclusion
+    
+    Research findings:
+    {research_results}
+
+  agent: writer_agent
+  context: [research_task] 

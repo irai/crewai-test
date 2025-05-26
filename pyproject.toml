@@ -1,0 +1,39 @@
+[project]
+name = "crewai_test"
+version = "0.1.0"
+description = "crewai_test using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "agno>=1.5.4",
+    "google-generativeai>=0.8.5",
+    "streamlit>=1.45.1",
+    "google-adk>=1.0.0",
+    "crewai>=0.121.0",
+    "crewai-tools[mcp]>=0.45.0",
+    "mcp>=1.9.1",
+    "mcpadapt[crewai]>=0.1.9",
+    "google-genai>=1.16.1",
+    "nest-asyncio>=1.6.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=1.0.0",
+    "ollama>=0.4.8",
+    "cerebras_cloud_sdk>=1.35.0"
+]
+
+[project.scripts]
+crewai_test = "crewai_test.main:run"
+run_crew = "crewai_test.main:run"
+train = "crewai_test.main:train"
+replay = "crewai_test.main:replay"
+test = "crewai_test.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/crewai_test"]
+
+[tool.crewai]
+type = "crew"
