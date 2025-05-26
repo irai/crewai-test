@@ -7,7 +7,7 @@ research_agent:
     You are an expert researcher with a keen eye for detail.
     Your expertise lies in finding relevant information and organizing it
     in a clear, structured manner.
-  llm: gemini/gemini-2.0-flash
+  llm: ollama/gemma3
 
 writer_agent:
   role: >
@@ -18,4 +18,4 @@ writer_agent:
     You are a skilled writer who excels at transforming
     research into compelling content. You have a talent for making
     complex information accessible and engaging.
-  llm: gemini/gemini-2.0-flash
+  llm: ollama/gemma3

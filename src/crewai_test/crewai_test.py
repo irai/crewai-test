@@ -1,6 +1,5 @@
 from crewai import Agent, Task, Crew, Process
 from crewai.project import CrewBase, agent, crew, task
-from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 from dotenv import load_dotenv
 
@@ -18,12 +17,14 @@ class TestCrew:
     def research_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['research_agent'],
+            verbose=True
         )
 
     @agent
     def writer_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['writer_agent'],
+            verbose=True
         )
 
     @task
@@ -43,14 +44,12 @@ class TestCrew:
         return Crew(
             agents=[self.research_agent(), self.writer_agent()],
             tasks=[self.research_task(), self.writing_task()],
-            # agents=self.agents,
-            # tasks=self.tasks,
             verbose=True,
             process=Process.sequential,
         )
 
 def main():
-    test_topic = "Research on the Impact of Artificial Intelligence on Modern Business"
+    test_topic = "Impact of AI Agents on Enterprise Architecture"
     
     try:
         test_crew = TestCrew()
