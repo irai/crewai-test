@@ -11,35 +11,31 @@ class TestCrew:
     # agents: List[BaseAgent]
     # tasks: List[Task]
 
-    # agents_config = 'config/agents.yaml'
-    # tasks_config = 'config/tasks.yaml'
+    agents_config = 'config/agents.yaml'
+    tasks_config = 'config/tasks.yaml'
     
     @agent
     def research_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['research_agent'],
-            verbose=True
         )
 
     @agent
     def writer_agent(self) -> Agent:
         return Agent(
             config = self.agents_config['writer_agent'],
-            verbose=True
         )
 
     @task
     def research_task(self) -> Task:
         return Task(
             config = self.tasks_config['research_task'],
-            verbose=True
         )
 
     @task
     def writing_task(self) -> Task:
         return Task(
             config = self.tasks_config['writing_task'],
-            verbose=True
         )
 
     @crew

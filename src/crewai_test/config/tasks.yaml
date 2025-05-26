@@ -1,5 +1,5 @@
 research_task:
-  description: >
+  description: |
     Research the following topic and provide key findings:
     {topic}
     
@@ -9,10 +9,13 @@ research_task:
     3. Any relevant statistics or data
     
     Format your findings in a clear, structured manner.
+  expected_output: |
+    A comprehensive research report containing key findings, supporting evidence,
+    and relevant statistics about the topic, formatted in a clear and structured manner.
   agent: research_agent
 
 writing_task:
-  description: >
+  description: |
     Using the research provided, create a comprehensive article about:
     {topic}
     
@@ -23,7 +26,8 @@ writing_task:
     4. End with a strong conclusion
     
     Research findings:
-    {research_results}
-
+  expected_output: |
+    A well-written, engaging article that effectively communicates the research findings
+    with a clear structure, including introduction, key points, and conclusion.
   agent: writer_agent
   context: [research_task] 
