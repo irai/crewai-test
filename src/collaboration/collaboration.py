@@ -43,7 +43,7 @@ article_task = Task(
     - Expert predictions for the next 5 years
     
     Collaborate with your teammates to ensure accuracy and quality.
-    Ensure you validate the information you find with the editor before finishing the article.""",
+    Ensure you validate the final version for clarity and accuracy before finalising. """,
     expected_output="A well-researched, engaging 1000-word article with proper structure and citations",
     agent=writer  # Writer leads, but can delegate research to researcher
 )
