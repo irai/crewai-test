@@ -57,8 +57,8 @@ def main():
     
     try:
         test_crew = TestCrew()
-        crew = test_crew.crew()
-        result = crew.kickoff(inputs={"topic": test_topic})
+        result = test_crew.writer_agent().kickoff(test_topic)
+        # crew = test_crew.crew().kickoff(inputs={"topic": test_topic})
         print("\nFinal Result:")
         print(result)
         
