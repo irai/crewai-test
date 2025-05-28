@@ -12,7 +12,7 @@ agent1 = Agent(
     goal="Find accurate, up-to-date information on city and its surroundings",
     backstory="""You're a meticulous researcher with expertise in finding 
     reliable sources and fact-checking information across various domains.""",
-    allow_delegation=True,
+    allow_delegation=False,
     verbose=True,
     llm=llm
 )
@@ -28,7 +28,7 @@ agent2 = Agent(
     goal="Find accurate, up-to-date information on regarding the traditional food in a city",
     backstory="""You're a meticulous researcher with expertise in finding 
     reliable sources and fact-checking information across various domains.""",
-    allow_delegation=True,
+    allow_delegation=False,
     verbose=True,
     llm=llm
 )
