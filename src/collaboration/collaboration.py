@@ -46,7 +46,7 @@ agent3 = Agent(
     You're known for your detailed and honest reviews.""",
     allow_delegation=True,
     verbose=True,
-    llm="openai/gpt-4o"
+    llm="openai/gpt-4o"  # CAUTION: allow delegation only works with gpt-4o 
 )
 
 # Create a task that encourages collaboration
@@ -54,7 +54,7 @@ article_task = Task(
     description="""Write a review about the traditional food in {city}.
     
     The article should include:
-    - Facts about the city based on your research so you can provide some context about the city
+    - Facts about the city based on your research so you can provide some context about the city including the history, culture, and other interesting facts
     - Best traditional food in the city
     
     Collaborate with your teammates to ensure accuracy and quality.
