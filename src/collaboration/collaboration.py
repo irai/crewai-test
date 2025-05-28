@@ -4,7 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-llm = "openai/gpt-4o-mini"
+# llm = "openai/gpt-4o-mini"
+# llm="ollama/llama3.2"
+llm="ollama/gemma3"
 
 # Create collaborative agents
 agent1 = Agent(
