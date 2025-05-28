@@ -32,6 +32,7 @@ class TestCrew:
     def research_task(self) -> Task:
         return Task(
             description="""Research the following topic and provide key findings:
+            {topic}
             
             Your research should include:
             1. Main points and key facts
@@ -47,6 +48,7 @@ class TestCrew:
     def writing_task(self) -> Task:
         return Task(
             description="""Using the research provided, create a comprehensive article about:
+            {topic}
             
             The article should:
             1. Have a clear introduction
@@ -64,7 +66,7 @@ class TestCrew:
     def create_crew(self) -> Crew:
         return Crew(
             agents=[self.research_agent(), self.writer_agent()],
-            tasks=[self.writing_task()],
+            tasks=[self.research_task()],
             verbose=True,
             process=Process.sequential,
             manager_llm="openai/gpt-4o"
