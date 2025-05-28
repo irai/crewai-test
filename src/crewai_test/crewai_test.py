@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+llm = "openai/gpt-4o-mini"
+
 class TestCrew:
     def research_agent(self) -> Agent:
         return Agent(
@@ -12,7 +14,7 @@ class TestCrew:
             backstory="""You are an expert researcher with a keen eye for detail.
             Your expertise lies in finding relevant information and organizing it
             in a clear, structured manner.""",
-            llm="openai/gpt-4o",
+            llm=llm,
             verbose=True,
             allow_delegation=True
         )
@@ -24,7 +26,7 @@ class TestCrew:
             backstory="""You are a skilled writer who excels at transforming
             research into compelling content. You have a talent for making
             complex information accessible and engaging.""",
-            llm="openai/gpt-4o",
+            llm=llm,
             verbose=True,
             allow_delegation=True
         )
@@ -47,16 +49,18 @@ class TestCrew:
 
     def writing_task(self) -> Task:
         return Task(
-            description="""Using the research provided, create a comprehensive article about:
+            description="""Research the following topic and create a comprehensive article about:
             {topic}
             
             The article should:
             1. Have a clear introduction
-            2. Include all key points from the research
+            2. Use a narrative style suitable for a blog post
             3. Be well-structured and engaging
             4. End with a strong conclusion
+
+            Research findings:
             
-            Research findings:""",
+            """,
             expected_output="""A well-written, engaging article that effectively communicates the research findings
             with a clear structure, including introduction, key points, and conclusion.""",
             agent=self.writer_agent(),
