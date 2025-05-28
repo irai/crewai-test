@@ -60,20 +60,20 @@ class TestCrew:
             expected_output="""A well-written, engaging article that effectively communicates the research findings
             with a clear structure, including introduction, key points, and conclusion.""",
             agent=self.writer_agent(),
-            context=['research_task']
+            context=[self.research_task()]
         )
 
     def create_crew(self) -> Crew:
         return Crew(
             agents=[self.research_agent(), self.writer_agent()],
-            tasks=[self.research_task()],
+            tasks=[self.writing_task()],
             verbose=True,
             process=Process.sequential,
             manager_llm="openai/gpt-4o"
         )
 
 def main():
-    test_topic = "use a research agent to research the Impact of AI Agents on Enterprise Architecture. return the raw research data"
+    test_topic = "Impact of AI Agents on Enterprise Architecture"
     
     try:
         test_crew = TestCrew()
