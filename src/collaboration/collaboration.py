@@ -4,56 +4,73 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+llm = "openai/gpt-4o-mini"
+
 # Create collaborative agents
-researcher = Agent(
-    role="Research Specialist",
-    goal="Find accurate, up-to-date information on any topic",
+agent1 = Agent(
+    role="City Specialist",
+    goal="Find accurate, up-to-date information on city and its surroundings",
     backstory="""You're a meticulous researcher with expertise in finding 
     reliable sources and fact-checking information across various domains.""",
-    allow_delegation=False,
-    verbose=True
-)
-
-writer = Agent(
-    role="Content Writer",
-    goal="Create engaging, well-structured content",
-    backstory="""You're a skilled content writer who excels at transforming 
-    research into compelling, readable content for different audiences.""",
     allow_delegation=True,
-    verbose=True
+    verbose=True,
+    llm=llm
 )
 
-editor = Agent(
-    role="Content Editor",
-    goal="Ensure content quality and consistency",
-    backstory="""You're an experienced editor with an eye for detail, 
-    ensuring content meets high standards for clarity and accuracy.""",
-    allow_delegation=False,
-    verbose=True
+# agent1_task = Task(
+#     description="""Find accurate, up-to-date information on {city} and its surroundings""",
+#     expected_output="A list of facts about the city",
+#     agent=agent1
+# )
+
+agent2 = Agent(
+    role="Food Specialist",
+    goal="Find accurate, up-to-date information on regarding the traditional food in a city",
+    backstory="""You're a meticulous researcher with expertise in finding 
+    reliable sources and fact-checking information across various domains.""",
+    allow_delegation=True,
+    verbose=True,
+    llm=llm
+)
+
+# agent2_task = Task(
+#     description="""Find accurate, up-to-date information on regarding the traditional food in the {city}""",
+#     expected_output="A list of facts about the traditional food in the city",
+#     agent=agent2
+# )
+
+agent3 = Agent(
+    role="Restaurant Reviewer",
+    goal="Write a review the traditional food in a city",
+    backstory="""You're an experienced reviewer with with experience in reviewing restaurants and food.
+    You're known for your detailed and honest reviews.""",
+    allow_delegation=True,
+    verbose=True,
+    llm="openai/gpt-4o"
 )
 
 # Create a task that encourages collaboration
 article_task = Task(
-    description="""Write a comprehensive 1000-word article about 'The Future of AI in Healthcare'.
+    description="""Write a review about the traditional food in {city}.
     
     The article should include:
-    - Current AI applications in healthcare
-    - Emerging trends and technologies  
-    - Potential challenges and ethical considerations
-    - Expert predictions for the next 5 years
+    - Facts about the city based on your research so you can provide some context about the city
+    - Best traditional food in the city
     
     Collaborate with your teammates to ensure accuracy and quality.
-    Ensure you validate the final version for clarity and accuracy before finalising. """,
-    expected_output="A well-researched, engaging 1000-word article with proper structure and citations",
-    agent=writer  # Writer leads, but can delegate research to researcher
+    """,
+    expected_output="A review about the traditional food in the city",
+    agent=agent3,
+    # context=[agent1, agent2]
 )
 
 # Create collaborative crew
 crew = Crew(
-    agents=[researcher, writer, editor],
+    agents=[agent1, agent2, agent3],
     tasks=[article_task],
     process=Process.sequential,
     verbose=True
 )
 
-result = crew.kickoff()
+result = crew.kickoff({"city": "Singapore"})
+print(result)
