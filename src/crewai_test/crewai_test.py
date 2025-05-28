@@ -1,5 +1,4 @@
 from crewai import Agent, Task, Crew, Process
-from crewai.project import CrewBase, agent, crew, task
 from typing import List
 from dotenv import load_dotenv
 
@@ -31,10 +30,8 @@ class TestCrew:
         )
 
     def research_task(self) -> Task:
-        """Creates and returns a research task for the given topic."""
         return Task(
-            description=f"""Research the following topic and provide key findings:
-            {topic}
+            description="""Research the following topic and provide key findings:
             
             Your research should include:
             1. Main points and key facts
@@ -48,10 +45,8 @@ class TestCrew:
         )
 
     def writing_task(self) -> Task:
-        """Creates and returns a writing task for the given topic."""
         return Task(
-            description=f"""Using the research provided, create a comprehensive article about:
-            {agent.crew._inputs["topic"]}
+            description="""Using the research provided, create a comprehensive article about:
             
             The article should:
             1. Have a clear introduction
@@ -67,12 +62,11 @@ class TestCrew:
         )
 
     def create_crew(self) -> Crew:
-        """Creates a crew with research and writing tasks for the given topic."""
         return Crew(
             agents=[self.research_agent(), self.writer_agent()],
             tasks=[self.writing_task()],
             verbose=True,
-            process=Process.hierarchical,
+            process=Process.sequential,
             manager_llm="openai/gpt-4o"
         )
 
@@ -90,7 +84,8 @@ def main():
         # result = test_crew.research_agent().kickoff(test_topic)
         
         # Example of using the full crew
-        result = test_crew.create_crew().kickoff(inputs={"topic": test_topic})
+        crew = test_crew.create_crew()
+        result = crew.kickoff(inputs={"topic": test_topic})
         print("\nFinal Result:\n", result)
         
         
